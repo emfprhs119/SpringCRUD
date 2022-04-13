@@ -20,6 +20,16 @@ public class WebController {
     @Autowired
     MockService mockService;
 
+
+    @GetMapping("/table")
+    String table(Model model, @RequestParam(value="page", defaultValue="1") int page) {
+        model.addAttribute("title","Database");
+        model.addAttribute("appList",mockService.findAllPage(page-1,10));
+        //model.addAttribute("appList",mockService.findAll());
+        return "stable";
+    }
+
+
     @GetMapping("/database")
     String database(Model model, @RequestParam(value="page", defaultValue="1") int page) {
         model.addAttribute("title","Database");
